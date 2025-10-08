@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mB8Vf47Mwss=",
+  "success": true,
+  "projectFilePath": "/home/Shebby/OneDrive/Sem5/SWK/UE/01/PrimeCalc/Libraries/PrimeCalc.Math/PrimeCalc.Math.csproj",
+  "expectedPackageFiles": [
+    "/home/Shebby/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.9/microsoft.aspnetcore.app.ref.9.0.9.nupkg.sha512"
+  ],
+  "logs": []
+}
