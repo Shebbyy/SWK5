@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PrimeCalc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ab885119be55a08da088df8b17a3f00b10e49b1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02367217f7c3fb5a4f3572dd9933a86d2ac6b8a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("PrimeCalc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PrimeCalc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
