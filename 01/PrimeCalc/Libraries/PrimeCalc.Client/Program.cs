@@ -6,6 +6,7 @@
  */
 
 using PrimeCalc.Math;
+using StringExtensions;
 
 const int FROM = 1;
 const int TO = 100;
@@ -18,4 +19,4 @@ for (int i = FROM; i <= TO; i++) {
     }
 }
 
-Console.WriteLine($"Prime Numbers in [{FROM} - {TO}] = " + string.Join(",", prime));
+Console.WriteLine($"Prime Numbers in [{FROM} - {TO}] = [{string.Join(",", prime)}]".Truncate(100, "..."));
