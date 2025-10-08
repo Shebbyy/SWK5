@@ -1,5 +1,4 @@
 .idea/
 **/bin/**
-**/obj/Debug/**
-**/obj/net9.0/**
+**/obj/**
 **/publish/**
