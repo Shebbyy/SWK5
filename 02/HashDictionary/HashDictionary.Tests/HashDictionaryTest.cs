@@ -1,3 +1,4 @@
+using FluentAssertions;
 using HashDictionary.Impl;
 
 namespace HashDictionary.Tests;
@@ -10,8 +11,11 @@ public class HashDictionaryTest {
         dict.Add(1, 10);
         dict[2] = 22;
 
-        Assert.Equal(10, dict[1]);
-        Assert.Equal(22, dict[2]);
+        //Assert.Equal(10, dict[1]);
+        //Assert.Equal(22, dict[2]);
+        // Fluent Assertions interesting NuGet Package for more readable Assertions
+        dict[1].Should().Be(10);
+        dict[2].Should().Be(22);
     }
 
     [Theory]
@@ -25,6 +29,7 @@ public class HashDictionaryTest {
             dict.Add(i, entry);
             i++;
         }
+        
         
         Assert.Equal(expected, dict.Count);
     }
