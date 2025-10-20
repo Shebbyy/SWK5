@@ -123,12 +123,31 @@ public class HashDictionary<TK, TV> : IDictionary<TK, TV> {
         throw new NotImplementedException();
     }
 
-    public bool Remove(KeyValuePair<TK, TV> item) {
-        throw new NotImplementedException();
-    }
+    public bool Remove(KeyValuePair<TK, TV> item) => Remove(item.Key);
 
     public bool Remove(TK key) {
-        throw new NotImplementedException();
+        Node n = FindNode(key);
+        if (n is null) {
+            throw new ArgumentException("Key does not exist, cannot be removed");
+        }
+
+        Node last = null;
+        for (; n is not null; n = n.Next) {
+            if (n.Key.Equals(key)) {
+                if (last is not null) {
+                    last.Next = n.Next;
+                }
+                else {
+                    ht[IndexFor(key)] = n.Next;
+                }
+
+                Count--;
+                return true;
+            }
+            last = n;
+        }
+
+        return false;
     }
     
     public void Clear() {
