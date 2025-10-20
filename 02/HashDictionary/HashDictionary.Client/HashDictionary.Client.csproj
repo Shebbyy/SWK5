@@ -7,4 +7,8 @@
         <Nullable>disable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HashDictionary.Impl\HashDictionary.Impl.csproj" />
+    </ItemGroup>
+
 </Project>
