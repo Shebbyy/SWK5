@@ -48,19 +48,44 @@ public class HashDictionary<TK, TV> : IDictionary<TK, TV> {
             return true;
         }
     #endregion
-    
-    public ICollection<TK> Keys { get; }
-    public ICollection<TV> Values { get; }
+
+    public ICollection<TK> Keys {
+        get {
+            var keys = new List<TK>(ht.Length);
+
+            foreach (KeyValuePair<TK, TV> pair in this) {
+                keys.Add(pair.Key);
+            }
+
+            return keys;
+        }
+    }
+
+    public ICollection<TV> Values {
+        get {
+            var values = new List<TV>(ht.Length);
+
+            foreach (KeyValuePair<TK, TV> pair in this) {
+                values.Add(pair.Value);
+            }
+
+            return values;
+        }
+    }
+
     public int Count { get; private set; }
     public bool IsReadOnly => false;
 
     public IEnumerator<KeyValuePair<TK, TV>> GetEnumerator() {
-        throw new NotImplementedException();
+        for (int i = 0; i < ht.Length; i++) {
+            for (Node n = ht[i]; n is not null; n = n.Next) {
+                // yield return in the background looks at IEnumerator definition with moveNext; Is obviously not implemented here, Compiler is told to act like Enumerator is implemented
+                // Bit of a StateMachine in the background for the iteration, remembers current control flow on yield, so it can continue where it stopped in the loop
+                yield return new KeyValuePair<TK, TV>(n.Key, n.Value);
+            }
+        }
     }
-
-    IEnumerator IEnumerable.GetEnumerator() {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     public void Add(KeyValuePair<TK, TV> item) => Add(item.Key, item.Value);
     

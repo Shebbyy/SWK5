@@ -3,8 +3,8 @@
 
 using HashDictionary.Impl;
 
-IDictionary<String, int> TestIndexerAndAdd() {
-    var cityInfo = new HashDictionary<String, int>();
+IDictionary<string, int> TestIndexerAndAdd() {
+    var cityInfo = new HashDictionary<string, int>();
 
     cityInfo["Hagenberg"] = 2_100;
     cityInfo["Linz"]      = 100_000;
@@ -27,7 +27,16 @@ IDictionary<String, int> TestIndexerAndAdd() {
         Console.WriteLine(e.GetType().Name + e.Message);
     }
 
+    Console.WriteLine("\n");
     return cityInfo;
 }
 
-TestIndexerAndAdd();
+void PrintDictionary<TK, TV>(IDictionary<TK, TV> dict) {
+    Console.WriteLine("PrintDictionary:");
+    foreach (KeyValuePair<TK, TV> entry in dict) {
+        Console.WriteLine($"-> {entry.Key}: {entry.Value}");
+    }
+}
+
+var cityInfo = TestIndexerAndAdd();
+PrintDictionary(cityInfo);
