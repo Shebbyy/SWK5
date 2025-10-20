@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashDictionary.Impl", "Hash
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashDictionary.Client", "HashDictionary.Client\HashDictionary.Client.csproj", "{0C75E370-17C1-41A8-8ECC-9697EBD5A68C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashDictionary.Tests", "HashDictionary.Tests\HashDictionary.Tests.csproj", "{3C073F68-BB12-440E-B410-8096AF0B176D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{0C75E370-17C1-41A8-8ECC-9697EBD5A68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C75E370-17C1-41A8-8ECC-9697EBD5A68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C75E370-17C1-41A8-8ECC-9697EBD5A68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C073F68-BB12-440E-B410-8096AF0B176D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C073F68-BB12-440E-B410-8096AF0B176D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C073F68-BB12-440E-B410-8096AF0B176D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C073F68-BB12-440E-B410-8096AF0B176D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
