@@ -6,17 +6,16 @@ public class PersonRepository
 
     public void AddPerson(Person person)
     {
-
+        persons.Add(person);
+    }
+    
+    public void AddPersons(IEnumerable<Person> persons) {
+        // Regular Call CollectionExtensions.AddAll also possible for Extension Methods
+        this.persons.AddAll(persons);
     }
 
-    public void AddPersons(IEnumerable<Person> persons)
-    {
-
-    }
-
-    public void PrintPersons(TextWriter textWriter)
-    {
-
+    public void PrintPersons(TextWriter textWriter) {
+        persons.ForEach(textWriter.WriteLine);
     }
 
     public IEnumerable<(string?, string?)> GetPersonNames()
@@ -24,9 +23,8 @@ public class PersonRepository
         return null;
     }
 
-    public IEnumerable<Person> FindPersonsByCity(string city)
-    {
-        return null;
+    public IEnumerable<Person> FindPersonsByCity(string city) {
+        return persons.Filter(p => p.City == city);
     }
 
     public Person FindYoungestPerson()
