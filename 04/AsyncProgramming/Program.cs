@@ -6,30 +6,34 @@ const string URL2 = "https://github.com/SoftUni/Programming-Basics-Book-CSharp-E
 var downloader = new Downloader();
 
 WriteLine($"====================== {nameof(Downloader.DownloadSync)} ======================");
-// TODO
+downloader.DownloadSync(URL1, "download1.pdf");
 WriteLine($"{nameof(Downloader.DownloadSync)} gave control back to caller");
 WriteLine($"{nameof(Downloader.DownloadSync)} completed work");
 WriteLine();
 
 WriteLine($"====================== {nameof(Downloader.DownloadAsync_Task)} ======================");
-// TODO
+var task = downloader.DownloadAsync_Task(URL1, "download2.pdf");
 WriteLine($"{nameof(Downloader.DownloadAsync_Task)} gave control back to caller");
-// TODO
-WriteLine($"{nameof(Downloader.DownloadAsync_Task)} completed work");
-WriteLine();
+task = task.ContinueWith(_ => {
+        WriteLine($"{nameof(Downloader.DownloadAsync_Task)} completed work");
+        WriteLine();
+    });
+
+// Not absolutely necessary, would continue with other methods mixing all the console outputs up though
+task.Wait(); // blocks the thread, therefore not allowing any handling of user inputs and such
 
 WriteLine($"====================== {nameof(Downloader.DownloadAsync_Await)} ======================");
-// TODO
+task = downloader.DownloadAsync_Await(URL1, "download3.pdf");
 WriteLine($"{nameof(Downloader.DownloadAsync_Await)} gave control back to caller");
-// TODO
+
+await task; // does not block the thread, as the one above, therefore can freely still handle userinputs
 WriteLine($"{nameof(Downloader.DownloadAsync_Await)} completed work");
 WriteLine();
 
 WriteLine($"======================= {nameof(Downloader.DownloadMultipleAsync)} =======================");
-// TODO
+task = downloader.DownloadMultipleAsync(URL1, "download_mult1.pdf", URL2, "download_mult2.pdf");
 WriteLine($"{nameof(Downloader.DownloadMultipleAsync)} gave control back to caller");
-// TODO
+
+await task;
 WriteLine($"{nameof(Downloader.DownloadMultipleAsync)} completed work");
 WriteLine();
-
-ReadLine(); 
