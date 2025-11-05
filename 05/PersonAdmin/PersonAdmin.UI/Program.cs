@@ -5,6 +5,7 @@ using PersonAdmin.BusinessLogic;
 using PersonAdmin.Dal.Ado;
 using PersonAdmin.Dal.Interface;
 using PersonAdmin.Dal.Simple;
+using PersonAdmin.Domain;
 
 const string APP_SETTINGS_DB_CONNECTION = "PersonDbConnection";
 
@@ -28,6 +29,8 @@ async Task Test(IPersonDao personDao) {
     await service.UpdateMultiplePeople();
     
     await service.PrintAll();
+
+    await service.InsertPersonAsync(new Person(-1, "TestInsert", "Test123", DateTime.Now));
 }
 
 string GetConnectionString() {

@@ -29,4 +29,12 @@ public class AdoPersonDao(IConnectionFactory connectionFactory) : IPersonDao {
 
         return changedRows > 0;
     }
+
+    public async Task InsertAsync(Person person) {
+        person.Id = await template.ExecuteScalarAsync<int>(
+            "insert into person (first_name, last_name, date_of_birth) output inserted id VALUES (@firstName, @lastName, @dateOfBirth)", 
+            new QueryParameter("@firstName", person.FirstName), 
+            new QueryParameter("@lastName", person.LastName), 
+            new QueryParameter("@dateOfBirth", person.DateOfBirth));
+    }
 }

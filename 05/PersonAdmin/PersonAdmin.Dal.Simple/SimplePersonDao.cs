@@ -32,4 +32,10 @@ public class SimplePersonDao : IPersonDao
 
         return Task.FromResult(true);
     }
+
+    public Task InsertAsync(Person person) {
+        person.Id = personList.Count > 0 ? personList.Max(p => p.Id) + 1 : 1;
+
+        return Task.CompletedTask;
+    }
 }

@@ -49,4 +49,9 @@ public class PersonService(IPersonDao personDao, TextWriter writer) {
         
         writer.WriteLine();
     }
+
+    public async Task InsertPersonAsync(Person person) {
+        await personDao.InsertAsync(person);
+        writer.WriteLine($"Inserted new Person {person}");
+    }
 }

@@ -54,4 +54,15 @@ public class AdoTemplate(IConnectionFactory connectionFactory) {
 
         return await command.ExecuteNonQueryAsync();
     }
+    
+    public async Task<T> ExecuteScalarAsync<T>(string statement, params QueryParameter[] parameters) {
+        using DbConnection conn = await connectionFactory.CreateConnectionAsync();
+        using DbCommand command = conn.CreateCommand();
+        command.CommandText = statement;
+        AddParameters(command, parameters);
+
+        object result = await command.ExecuteScalarAsync() ?? throw new ArgumentException("SQL Statement is not valid!");
+
+        return (T)Convert.ChangeType(result, typeof(T));
+    }
 }
