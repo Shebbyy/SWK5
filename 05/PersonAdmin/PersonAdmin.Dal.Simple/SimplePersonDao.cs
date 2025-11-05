@@ -21,7 +21,7 @@ public class SimplePersonDao : IPersonDao
     }
 
     public bool update(Person person) {
-        var currentPerson = personList.Where(p => p.Id == person.Id).Single();
+        var currentPerson = personList.Single(p => p.Id == person.Id);
         currentPerson.FirstName = person.FirstName;
         currentPerson.LastName = person.LastName;
         currentPerson.DateOfBirth = person.DateOfBirth;

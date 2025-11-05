@@ -24,6 +24,10 @@ void Test(IPersonDao personDao) {
 
     service.UpdateDateOfBirth(1, DateTime.ParseExact("15/01/2003", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
     service.PrintById(1);
+    
+    service.UpdateMultiplePeople();
+    
+    service.PrintAll();
 }
 
 string GetConnectionString() {

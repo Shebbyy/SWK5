@@ -1,4 +1,6 @@
+using System.Transactions;
 using PersonAdmin.Dal.Interface;
+using PersonAdmin.Domain;
 
 namespace PersonAdmin.BusinessLogic;
 
@@ -24,5 +26,26 @@ public class PersonService(IPersonDao personDao, TextWriter writer) {
         
         newPerson.DateOfBirth = newDob;
         return personDao.update(newPerson);
+    }
+
+    public void UpdateMultiplePeople() {
+        writer.WriteLine("Updating multiple");
+
+        try {
+            // only commits transaction after scope.Complete()
+            using (TransactionScope scope = new TransactionScope()) {
+                personDao.update(new Person(2, "Test1", "Test2", DateTime.Now));
+
+                //throw new Exception(); // Any Exception would cause inconsistent DB State
+                personDao.update(new Person(3, "Test2", "Test3", DateTime.Now));
+                
+                scope.Complete();
+            }
+        }
+        catch (Exception e) {
+            writer.WriteLine(e);
+        }
+        
+        writer.WriteLine();
     }
 }
