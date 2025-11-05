@@ -33,4 +33,13 @@ public class AdoTemplate(IConnectionFactory connectionFactory) {
             command.Parameters.Add(dbParam);
         }
     }
+    
+    public int Execute(string statement, params QueryParameter[] parameters) {
+        using DbConnection conn = connectionFactory.CreateConnection();
+        using DbCommand command = conn.CreateCommand();
+        command.CommandText = statement;
+        AddParameters(command, parameters);
+
+        return command.ExecuteNonQuery();
+    }
 }

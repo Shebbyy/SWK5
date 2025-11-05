@@ -15,4 +15,14 @@ public class PersonService(IPersonDao personDao, TextWriter writer) {
         writer.WriteLine(personDao.findById(id));
         Console.WriteLine();
     }
+
+    public bool UpdateDateOfBirth(int id, DateTime newDob) {
+        var newPerson = personDao.findById(id);
+        if (newPerson is null) {
+            throw new InvalidDataException($"Person with ID {id} does not exist!");
+        }
+        
+        newPerson.DateOfBirth = newDob;
+        return personDao.update(newPerson);
+    }
 }

@@ -21,6 +21,9 @@ void Test(IPersonDao personDao) {
     
     Console.WriteLine("Person with ID 1:");
     service.PrintById(1);
+
+    service.UpdateDateOfBirth(1, DateTime.ParseExact("15/01/2003", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
+    service.PrintById(1);
 }
 
 string GetConnectionString() {

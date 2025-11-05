@@ -19,4 +19,13 @@ public class SimplePersonDao : IPersonDao
     public Person findById(int id) {
         return personList.First(p => p.Id == id);
     }
+
+    public bool update(Person person) {
+        var currentPerson = personList.Where(p => p.Id == person.Id).Single();
+        currentPerson.FirstName = person.FirstName;
+        currentPerson.LastName = person.LastName;
+        currentPerson.DateOfBirth = person.DateOfBirth;
+
+        return true;
+    }
 }
