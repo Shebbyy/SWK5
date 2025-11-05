@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="Dal.Common/Dal.Common.csproj" />
+  <Project Path="PersonAdmin.BusinessLogic.Tests/PersonAdmin.BusinessLogic.Tests.csproj" Id="76290f4b-25c3-457e-af9f-7603f2610e71" />
+  <Project Path="PersonAdmin.BusinessLogic/PersonAdmin.BusinessLogic.csproj" />
+  <Project Path="PersonAdmin.Dal.Ado/PersonAdmin.Dal.Ado.csproj" />
+  <Project Path="PersonAdmin.Dal.Interface/PersonAdmin.Dal.Interface.csproj" />
+  <Project Path="PersonAdmin.Dal.Simple/PersonAdmin.Dal.Simple.csproj" />
+  <Project Path="PersonAdmin.Domain/PersonAdmin.Domain.csproj" />
+  <Project Path="PersonAdmin.UI/PersonAdmin.UI.csproj" />
+</Solution>

@@ -1,0 +1,16 @@
+<Project Sdk="MSTest.Sdk/3.6.4">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseVSTest>true</UseVSTest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PersonAdmin.BusinessLogic\PersonAdmin.BusinessLogic.csproj" />
+    <ProjectReference Include="..\PersonAdmin.Dal.Simple\PersonAdmin.Dal.Simple.csproj" />
+  </ItemGroup>
+
+</Project>
