@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Dal.Common\Dal.Common.csproj" />
+		<ProjectReference Include="..\PersonAdmin.BusinessLogic\PersonAdmin.BusinessLogic.csproj" />
 		<ProjectReference Include="..\PersonAdmin.Dal.Ado\PersonAdmin.Dal.Ado.csproj" />
 		<ProjectReference Include="..\PersonAdmin.Dal.Interface\PersonAdmin.Dal.Interface.csproj" />
 		<ProjectReference Include="..\PersonAdmin.Dal.Simple\PersonAdmin.Dal.Simple.csproj" />

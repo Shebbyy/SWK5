@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PersonAdmin.Dal.Interface\PersonAdmin.Dal.Interface.csproj" />
+  </ItemGroup>
+
 </Project>
