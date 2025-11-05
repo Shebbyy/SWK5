@@ -14,7 +14,7 @@ public class PersonService(IPersonDao personDao, TextWriter writer) {
     }
 
     public async Task PrintById(int id) {
-        writer.WriteLine(await personDao.findById(id));
+        writer.WriteLine((await personDao.findById(id))?.ToString() ?? "<null>");
         Console.WriteLine();
     }
 
