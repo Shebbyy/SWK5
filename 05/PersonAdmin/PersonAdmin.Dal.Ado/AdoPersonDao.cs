@@ -1,21 +1,12 @@
-using System.Data.Common;
-using System.Runtime.CompilerServices;
 using Dal.Common;
-using Microsoft.Data.SqlClient;
 using PersonAdmin.Dal.Interface;
 using PersonAdmin.Domain;
 
 namespace PersonAdmin.Dal.Ado;
 
-public class AdoPersonDao : IPersonDao {
+public class AdoPersonDao(IConnectionFactory connectionFactory) : IPersonDao {
 
-    private readonly AdoTemplate template = new AdoTemplate(GetConnectionString());
-
-    private static string GetConnectionString() {
-        var pwd = Environment.GetEnvironmentVariable("DB_PWD");
-        var connectionString = $"Data Source=localhost;Initial Catalog=person_db;User ID=sa;Password={pwd};Trust Server Certificate=True";
-        return connectionString;
-    }
+    private readonly AdoTemplate template = new AdoTemplate(connectionFactory);
     
     public IEnumerable<Person> findAll() => template.Query("SELECT * FROM person", reader => new Person(
         (int)reader["Id"],
