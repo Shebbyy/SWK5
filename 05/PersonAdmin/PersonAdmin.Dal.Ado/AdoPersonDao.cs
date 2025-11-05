@@ -6,14 +6,20 @@ using PersonAdmin.Domain;
 namespace PersonAdmin.Dal.Ado;
 
 public class AdoPersonDao : IPersonDao {
-    public IEnumerable<Person> findAll() {
+
+    public DbConnection GetConnection() {
         var pwd = Environment.GetEnvironmentVariable("DB_PWD");
         var connectionString = $"Data Source=localhost;Initial Catalog=person_db;User ID=sa;Password={pwd};Trust Server Certificate=True";
         
-        using DbConnection conn = new SqlConnection();
+        DbConnection conn = new SqlConnection();
         conn.ConnectionString = connectionString;
         conn.Open();
 
+        return conn;
+    }
+    
+    public IEnumerable<Person> findAll() {
+        using DbConnection conn = GetConnection();
         using DbCommand command = conn.CreateCommand();
         command.CommandText = "SELECT * FROM person";
 
@@ -32,7 +38,20 @@ public class AdoPersonDao : IPersonDao {
         return l;
     }
 
-    public Person findById(int id) {
-        throw new NotImplementedException();
+    public Person? findById(int id) {
+        using DbConnection conn = GetConnection();
+        using DbCommand command = conn.CreateCommand();
+        command.CommandText = $"SELECT * FROM person WHERE Id = {id}";
+
+        var reader = command.ExecuteReader();
+        if (reader.Read()) {
+            return new Person(
+                (int)reader["Id"], 
+            (string)reader["first_name"], 
+            (string)reader["last_name"], 
+            (DateTime)reader["date_of_birth"]
+                );
+        }
+        return null;
     }
 }
