@@ -18,6 +18,9 @@ void Test(IPersonDao personDao) {
     var service = new PersonService(personDao, Console.Out);
     
     service.PrintAll();
+    
+    Console.WriteLine("Person with ID 1:");
+    service.PrintById(1);
 }
 
 string GetConnectionString() {
