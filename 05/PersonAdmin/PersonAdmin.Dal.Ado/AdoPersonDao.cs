@@ -1,4 +1,6 @@
 using System.Data.Common;
+using System.Runtime.CompilerServices;
+using Dal.Common;
 using Microsoft.Data.SqlClient;
 using PersonAdmin.Dal.Interface;
 using PersonAdmin.Domain;
@@ -7,51 +9,25 @@ namespace PersonAdmin.Dal.Ado;
 
 public class AdoPersonDao : IPersonDao {
 
-    public DbConnection GetConnection() {
+    private readonly AdoTemplate template = new AdoTemplate(GetConnectionString());
+
+    private static string GetConnectionString() {
         var pwd = Environment.GetEnvironmentVariable("DB_PWD");
         var connectionString = $"Data Source=localhost;Initial Catalog=person_db;User ID=sa;Password={pwd};Trust Server Certificate=True";
-        
-        DbConnection conn = new SqlConnection();
-        conn.ConnectionString = connectionString;
-        conn.Open();
-
-        return conn;
+        return connectionString;
     }
     
-    public IEnumerable<Person> findAll() {
-        using DbConnection conn = GetConnection();
-        using DbCommand command = conn.CreateCommand();
-        command.CommandText = "SELECT * FROM person";
+    public IEnumerable<Person> findAll() => template.Query("SELECT * FROM person", reader => new Person(
+        (int)reader["Id"],
+        (string)reader["first_name"],
+        (string)reader["last_name"],
+        (DateTime)reader["date_of_birth"]
+    ));
 
-        using DbDataReader reader = command.ExecuteReader();
-
-        var l = new List<Person>();
-        // yield rather bad, as if not all results are iterated upon, while is never finished, therefore never finishing the method and closing the db conn
-        while (reader.Read()) {
-            l.Add(new Person(
-                (int)reader["Id"], 
-                (string)reader["first_name"], 
-                (string)reader["last_name"], 
-                (DateTime)reader["date_of_birth"]));
-        }
-
-        return l;
-    }
-
-    public Person? findById(int id) {
-        using DbConnection conn = GetConnection();
-        using DbCommand command = conn.CreateCommand();
-        command.CommandText = $"SELECT * FROM person WHERE Id = {id}";
-
-        var reader = command.ExecuteReader();
-        if (reader.Read()) {
-            return new Person(
-                (int)reader["Id"], 
-            (string)reader["first_name"], 
-            (string)reader["last_name"], 
-            (DateTime)reader["date_of_birth"]
-                );
-        }
-        return null;
-    }
+    public Person? findById(int id) => template.Query($"SELECT * FROM person where Id = {id}", reader => new Person(
+        (int)reader["Id"],
+        (string)reader["first_name"],
+        (string)reader["last_name"],
+        (DateTime)reader["date_of_birth"]
+    )).FirstOrDefault();
 }
