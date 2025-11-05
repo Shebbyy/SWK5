@@ -16,11 +16,11 @@ public class AdoPersonDao(IConnectionFactory connectionFactory) : IPersonDao {
         (DateTime)reader["date_of_birth"]
     );
     
-    public IEnumerable<Person> findAll() => template.Query("SELECT * FROM person", RowToPerson);
+    public async Task<IEnumerable<Person>> findAll() => await template.QueryAsync("SELECT * FROM person", RowToPerson);
 
-    public Person? findById(int id) => template.Query("SELECT * FROM person where Id = @id", RowToPerson, new QueryParameter("@id", id)).SingleOrDefault();
-    public bool update(Person person) {
-        int changedRows = template.Execute("UPDATE person SET first_name = @firstName, last_name = @lastName, date_of_birth = @dateOfBirth WHERE Id = @id", [
+    public async Task<Person?> findById(int id) => await template.QuerySingleAsync("SELECT * FROM person where Id = @id", RowToPerson, new QueryParameter("@id", id));
+    public async Task<bool> update(Person person) {
+        int changedRows = await template.ExecuteAsync("UPDATE person SET first_name = @firstName, last_name = @lastName, date_of_birth = @dateOfBirth WHERE Id = @id", [
             new QueryParameter("@id", person.Id),
             new QueryParameter("@firstName", person.FirstName),
             new QueryParameter("@lastName", person.LastName),

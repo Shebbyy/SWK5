@@ -29,4 +29,15 @@ public class ProviderIndependentConnectionFactory : IConnectionFactory
         conn.Open();
         return conn;
     }
+
+    public async Task<DbConnection> CreateConnectionAsync() {
+        var conn = dbProviderFactory.CreateConnection();
+        if (conn is null) {
+            throw new ExternalException("DB not accessible");
+        }
+        
+        conn.ConnectionString = connectionString;
+        await conn.OpenAsync();
+        return conn;
+    }
 }

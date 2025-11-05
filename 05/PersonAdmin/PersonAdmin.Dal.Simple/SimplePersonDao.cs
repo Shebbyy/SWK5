@@ -12,20 +12,24 @@ public class SimplePersonDao : IPersonDao
         new Person(3, "Max", "Mustermann", DateTime.Now.AddYears(-30))
     };
 
-    public IEnumerable<Person> findAll() {
-        return personList;
+    public Task<IEnumerable<Person>> findAll() {
+        return Task.FromResult<IEnumerable<Person>>(personList);
     }
 
-    public Person findById(int id) {
-        return personList.First(p => p.Id == id);
+    public Task<Person?> findById(int id) {
+        return Task.FromResult(personList.FirstOrDefault(p => p.Id == id));
     }
 
-    public bool update(Person person) {
-        var currentPerson = personList.Single(p => p.Id == person.Id);
+    public Task<bool> update(Person person) {
+        var currentPerson = personList.SingleOrDefault(p => p.Id == person.Id);
+        if (currentPerson is null) {
+            return Task.FromResult(false);
+        }
+        
         currentPerson.FirstName = person.FirstName;
         currentPerson.LastName = person.LastName;
         currentPerson.DateOfBirth = person.DateOfBirth;
 
-        return true;
+        return Task.FromResult(true);
     }
 }

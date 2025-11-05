@@ -8,21 +8,33 @@ public delegate T RowMapper<T>(IDataRecord reader);
 
 public class AdoTemplate(IConnectionFactory connectionFactory) {
     
-    public IEnumerable<T> Query<T>(string statement, RowMapper<T> rowMapper, params QueryParameter[] parameters) {
-        using DbConnection conn = connectionFactory.CreateConnection();
+    public async Task<IEnumerable<T>> QueryAsync<T>(string statement, RowMapper<T> rowMapper, params QueryParameter[] parameters) {
+        using DbConnection conn = await connectionFactory.CreateConnectionAsync();
         using DbCommand command = conn.CreateCommand();
         command.CommandText = statement;
         AddParameters(command, parameters);
 
-        using DbDataReader reader = command.ExecuteReader();
+        using DbDataReader reader = await command.ExecuteReaderAsync();
 
         var items = new List<T>();
 
-        while (reader.Read()) {
+        while (await reader.ReadAsync()) {
             items.Add(rowMapper(reader));
         }
 
         return items;
+    }
+
+    public async Task<T?> QuerySingleAsync<T>(string statement, RowMapper<T> rowMapper,
+        params QueryParameter[] parameters) {
+        using DbConnection conn = await connectionFactory.CreateConnectionAsync();
+        using DbCommand command = conn.CreateCommand();
+        command.CommandText = statement;
+        AddParameters(command, parameters);
+
+        var reader = await command.ExecuteReaderAsync();
+        await reader.ReadAsync();
+        return rowMapper(reader);
     }
 
     private void AddParameters(DbCommand command, QueryParameter[] queryParams) {
@@ -34,12 +46,12 @@ public class AdoTemplate(IConnectionFactory connectionFactory) {
         }
     }
     
-    public int Execute(string statement, params QueryParameter[] parameters) {
-        using DbConnection conn = connectionFactory.CreateConnection();
+    public async Task<int> ExecuteAsync(string statement, params QueryParameter[] parameters) {
+        using DbConnection conn = await connectionFactory.CreateConnectionAsync();
         using DbCommand command = conn.CreateCommand();
         command.CommandText = statement;
         AddParameters(command, parameters);
 
-        return command.ExecuteNonQuery();
+        return await command.ExecuteNonQueryAsync();
     }
 }

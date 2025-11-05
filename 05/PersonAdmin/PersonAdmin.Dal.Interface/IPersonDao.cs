@@ -3,7 +3,7 @@ using PersonAdmin.Domain;
 namespace PersonAdmin.Dal.Interface;
 
 public interface IPersonDao {
-    IEnumerable<Person> findAll();
-    Person? findById(int id);
-    bool update(Person person);
+    Task<IEnumerable<Person>> findAll();
+    Task<Person?> findById(int id);
+    Task<bool> update(Person person);
 }

@@ -8,26 +8,26 @@ using PersonAdmin.Dal.Simple;
 
 const string APP_SETTINGS_DB_CONNECTION = "PersonDbConnection";
 
-Test(new SimplePersonDao());
-Test(new AdoPersonDao(new ProviderIndependentConnectionFactory(ProviderIndependentConnectionFactory.MICROSOFT_SQL_CLIENT_PROVIDER_NAME, GetConnectionString())));
+await Test(new SimplePersonDao());
+await Test(new AdoPersonDao(new ProviderIndependentConnectionFactory(ProviderIndependentConnectionFactory.MICROSOFT_SQL_CLIENT_PROVIDER_NAME, GetConnectionString())));
 
-void Test(IPersonDao personDao) {
+async Task Test(IPersonDao personDao) {
     Console.WriteLine(personDao.GetType());
     Console.WriteLine();
 
     var service = new PersonService(personDao, Console.Out);
     
-    service.PrintAll();
+    await service.PrintAll();
     
     Console.WriteLine("Person with ID 1:");
-    service.PrintById(1);
+    await service.PrintById(1);
 
-    service.UpdateDateOfBirth(1, DateTime.ParseExact("15/01/2003", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
-    service.PrintById(1);
+    await service.UpdateDateOfBirth(1, DateTime.ParseExact("15/01/2003", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
+    await service.PrintById(1);
     
-    service.UpdateMultiplePeople();
+    await service.UpdateMultiplePeople();
     
-    service.PrintAll();
+    await service.PrintAll();
 }
 
 string GetConnectionString() {
