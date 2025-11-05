@@ -8,10 +8,11 @@ public delegate T RowMapper<T>(IDataRecord reader);
 
 public class AdoTemplate(IConnectionFactory connectionFactory) {
     
-    public IEnumerable<T> Query<T>(string statement, RowMapper<T> rowMapper) {
+    public IEnumerable<T> Query<T>(string statement, RowMapper<T> rowMapper, params QueryParameter[] parameters) {
         using DbConnection conn = connectionFactory.CreateConnection();
         using DbCommand command = conn.CreateCommand();
         command.CommandText = statement;
+        AddParameters(command, parameters);
 
         using DbDataReader reader = command.ExecuteReader();
 
@@ -22,5 +23,14 @@ public class AdoTemplate(IConnectionFactory connectionFactory) {
         }
 
         return items;
+    }
+
+    private void AddParameters(DbCommand command, QueryParameter[] queryParams) {
+        foreach (var queryParam in queryParams) {
+            DbParameter dbParam = command.CreateParameter();
+            dbParam.ParameterName = queryParam.Name;
+            dbParam.Value = queryParam.Value;
+            command.Parameters.Add(dbParam);
+        }
     }
 }

@@ -18,5 +18,5 @@ public class AdoPersonDao(IConnectionFactory connectionFactory) : IPersonDao {
     
     public IEnumerable<Person> findAll() => template.Query("SELECT * FROM person", RowToPerson);
 
-    public Person? findById(int id) => template.Query($"SELECT * FROM person where Id = {id}", RowToPerson).FirstOrDefault();
+    public Person? findById(int id) => template.Query("SELECT * FROM person where Id = @id", RowToPerson, new QueryParameter("@id", id)).SingleOrDefault();
 }
