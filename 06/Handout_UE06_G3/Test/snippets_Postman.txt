@@ -1,0 +1,34 @@
+GetCustomerById (Success)
+=============================
+
+pm.test("Status code is 200", () => pm.response.to.have.status(200));
+
+pm.test("Response Body is correct", function () {
+  var jsonData = pm.response.json();
+
+  pm.expect(jsonData.id).to.be.eql('cccccccc-0000-0000-0000-111111111111');
+  pm.expect(jsonData).to.have.property('name').to.be.a('string').and.not.be.null;
+  ['name','city','rating'].forEach(prop => 
+    pm.expect(jsonData).to.have.property(prop).to.be.a('string').and.not.be.null)
+  pm.expect(jsonData).to.have.property('zipCode').to.be.a('number')
+                     .and.to.be.gte(1000);
+  pm.expect(jsonData).to.have.property('totalRevenue');
+});
+
+
+GetOrdersOfCustomer (Success)
+=============================
+
+pm.test("Status code is 200", () => pm.response.to.have.status(200));
+
+pm.test("Body is okay", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.be.an('array').but.not.an('object');
+    jsonData.forEach(order => pm.expect(order).to.have.property('id')
+                                .to.be.a('string').and.not.be.null);
+});
+
+
+
+
+
