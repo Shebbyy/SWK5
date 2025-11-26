@@ -1,6 +1,8 @@
-@OrderManagement.API_HostAddress = http://localhost:5280
+GET http://localhost:5280/api/customers
+Accept: application/json
 
-GET {{OrderManagement.API_HostAddress}}/weatherforecast/
+###
+GET http://localhost:5280/api/customers?rating=A
 Accept: application/json
 
 ###
