@@ -1,0 +1,208 @@
+﻿@url = http://localhost:5000
+@contentType = application/json
+@contentTypePatch = application/json-patch+json
+
+###
+
+# Get all customers
+GET {{url}}/api/customers
+Accept: {{contentType}}
+
+###
+
+# Get all customers with rating
+GET {{url}}/api/customers?rating=A
+Accept: {{contentType}}
+
+###
+
+# Get customer by ID (success)
+GET {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111
+Accept: {{contentType}}
+
+###
+
+# Get customer by ID (failure)
+GET {{url}}/api/customers/cccccccc-9999-9999-9999-999999999999
+Accept: {{contentType}}
+
+###
+
+# Get all customers in XML format
+GET {{url}}/api/customers
+Accept: application/xml
+
+###
+
+# Create customer
+POST {{url}}/api/customers
+Content-Type:{{contentType}}
+
+{
+  "name": "Klaus Moser",
+  "zipCode": 5020,
+  "city": "Salzburg",
+  "rating": "B"
+}
+
+###
+
+# Create customer with GUID
+POST {{url}}/api/customers
+Content-Type:{{contentType}}
+
+{
+  "id": "cccccccc-0000-0000-0000-211111111111",
+  "name": "Klaus Moser",
+  "zipCode": 5020,
+  "city": "Salzburg",
+  "rating": "B"
+}
+
+###
+
+# Update customer (success)
+PUT {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111
+Content-Type:{{contentType}}
+
+{
+  "name": "Stefan Mayr",
+  "zipCode": 8010,
+  "city": "Graz",
+  "rating": "A"
+}
+
+###
+
+# Update customer (failure)
+PUT {{url}}/api/customers/cccccccc-0000-0000-9999-999999999999
+Content-Type:{{contentType}}
+
+{
+  "name": "Stefan Mayr",
+  "zipCode": 8010,
+  "city": "Graz",
+  "rating": "A"
+}
+###
+
+# Update customer (validation error)
+PUT {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111
+Content-Type:{{contentType}}
+
+{
+  "zipCode": 8010,
+  "city": "Graz",
+  "rating": "A"
+}
+
+###
+
+# Patch customer (success)
+PATCH {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111
+Content-Type: {{contentTypePatch}}
+
+[
+  {
+    "op": "replace",
+    "path": "/name",
+    "value": "Hugo Boss"
+  },
+  {
+    "op": "replace",
+    "path": "/city",
+    "value": "Klagenfurt"
+  }
+]
+
+###
+
+
+# Patch customer (failure: validation error)
+PATCH {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111
+Content-Type: {{contentTypePatch}}
+
+[
+  {
+    "op": "replace",
+    "path": "/xxx",
+    "value": "Hugo"
+  },
+  {
+    "op": "replace",
+    "path": "/city",
+    "value": "Klagenfurt"
+  }
+]
+
+###
+
+# Patch customer (failure: not found)
+PATCH {{url}}/api/customers/cccccccc-0000-0000-0000-000000111111
+Content-Type: {{contentTypePatch}}
+
+[
+  {
+    "op": "replace",
+    "path": "/zipCode",
+    "value": 9010
+  },
+  {
+    "op": "replace",
+    "path": "/city",
+    "value": "Klagenfurt"
+  }
+]
+
+###
+# Delete Customer
+DELETE {{url}}/api/customers/cccccccc-0000-0000-0000-444444444444
+
+###
+# Get orders of customer
+GET {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111/orders
+Accept: {{contentType}}
+
+
+###
+# Get order by ID
+GET {{url}}/api/orders/aaaaaaaa-0000-0000-0000-000000222222
+Accept: {{contentType}}
+
+###
+# Get orders of customer
+GET {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111/orders
+Accept: {{contentType}}
+
+###
+# Create order for customer
+POST {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111/orders
+Content-Type: {{contentType}}
+
+{
+  "orderDate": "2021-10-12T00:00:00+01:00",
+  "article": "Logitech Tastatur",
+  "totalPrice": 50.90
+}
+
+###
+
+# Update totals for customer
+POST {{url}}/api/customers/cccccccc-0000-0000-0000-111111111111/update-totals
+
+###
+
+# Update order
+PUT {{url}}/api/orders/aaaaaaaa-0000-0000-0000-000000222222
+Content-Type: {{contentType}}
+
+{
+  "orderDate": "2021-05-15T00:00:00+02:00",
+  "article": "Vorwerk Saugroboter",
+  "totalPrice": 999.99
+}
+
+###
+
+# Delete order
+DELETE {{url}}/api/orders/aaaaaaaa-0000-0000-0000-000000222222

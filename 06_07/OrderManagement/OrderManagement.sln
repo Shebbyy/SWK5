@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagement.API", "OrderManagement.API\OrderManagement.API.csproj", "{BB4A92AD-289B-48CB-91E3-CAED52ED08D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagement.Logic", "OrderManagement.Logic\OrderManagement.Logic.csproj", "{42C53D6B-408B-4BF0-A2FA-1D4EA2FC5641}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagement.Domain", "OrderManagement.Domain\OrderManagement.Domain.csproj", "{ECD791BB-F709-461C-BE0C-495E3837BE50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{BB4A92AD-289B-48CB-91E3-CAED52ED08D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB4A92AD-289B-48CB-91E3-CAED52ED08D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB4A92AD-289B-48CB-91E3-CAED52ED08D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42C53D6B-408B-4BF0-A2FA-1D4EA2FC5641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42C53D6B-408B-4BF0-A2FA-1D4EA2FC5641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42C53D6B-408B-4BF0-A2FA-1D4EA2FC5641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42C53D6B-408B-4BF0-A2FA-1D4EA2FC5641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECD791BB-F709-461C-BE0C-495E3837BE50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECD791BB-F709-461C-BE0C-495E3837BE50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECD791BB-F709-461C-BE0C-495E3837BE50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECD791BB-F709-461C-BE0C-495E3837BE50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
