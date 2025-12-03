@@ -23,15 +23,22 @@ builder.Services.AddScoped<IOrderManagementLogic, OrderManagementLogic>(); // In
 //builder.Services.AddTransient<IOrderManagementLogic, OrderManagementLogic>(); // Instance per Injection
 //builder.Services.AddSingleton<IOrderManagementLogic, OrderManagementLogic>(); // Instance per Runtime; Db Service with permanent Connection, HttpClient with Port allocation 
 
-var app = builder.Build();
+builder.Services.AddCors(corsBuilder => corsBuilder.AddDefaultPolicy(policy => policy
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+)); // Cors Configuration; For Prod -> WithOrigin
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
-    app.MapOpenApi();
-}
+builder.Services.AddOpenApiDocument(settings => 
+    settings.Title = "Order Management Api");
+
+var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors(); // Cors Middleware added
+app.UseOpenApi();
+app.UseSwaggerUi(settings => settings.Path = "/swagger");
 
 app.Run();

@@ -9,10 +9,13 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9"/>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers\" />
+        <PackageReference Include="NSwag.Annotations" Version="14.6.3" />
+        <PackageReference Include="NSwag.AspNetCore" Version="14.6.3" />
+        <PackageReference Include="NSwag.MSBuild" Version="14.6.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Riok.Mapperly" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup>

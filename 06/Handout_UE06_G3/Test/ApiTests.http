@@ -1,4 +1,4 @@
-﻿@url = http://localhost:5000
+﻿@url = http://localhost:5280
 @contentType = application/json
 @contentTypePatch = application/json-patch+json
 
@@ -41,7 +41,7 @@ Content-Type:{{contentType}}
 {
   "name": "Klaus Moser",
   "zipCode": 5020,
-  "city": "Salzburg",
+  "location": "Salzburg",
   "rating": "B"
 }
 

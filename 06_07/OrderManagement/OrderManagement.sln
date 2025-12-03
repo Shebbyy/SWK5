@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagement.Logic", "Or
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagement.Domain", "OrderManagement.Domain\OrderManagement.Domain.csproj", "{ECD791BB-F709-461C-BE0C-495E3837BE50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagement.JavaScriptClient", "OrderManagement.JavaScriptClient\OrderManagement.JavaScriptClient.csproj", "{363E38D4-F6DB-43FE-BA44-1E8935E2B21C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{ECD791BB-F709-461C-BE0C-495E3837BE50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECD791BB-F709-461C-BE0C-495E3837BE50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECD791BB-F709-461C-BE0C-495E3837BE50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363E38D4-F6DB-43FE-BA44-1E8935E2B21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363E38D4-F6DB-43FE-BA44-1E8935E2B21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363E38D4-F6DB-43FE-BA44-1E8935E2B21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363E38D4-F6DB-43FE-BA44-1E8935E2B21C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
