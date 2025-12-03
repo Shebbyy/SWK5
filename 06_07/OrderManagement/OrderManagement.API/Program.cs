@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using OrderManagement.Api.HostedService;
+using OrderManagement.API.HostedService;
 using OrderManagement.Logic;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +33,10 @@ builder.Services.AddCors(corsBuilder => corsBuilder.AddDefaultPolicy(policy => p
 
 builder.Services.AddOpenApiDocument(settings => 
     settings.Title = "Order Management Api");
+
+builder.Services.AddSingleton<QueuedUpdateService>();
+builder.Services.AddHostedService<QueuedUpdateService>();
+builder.Services.AddSingleton<UpdateChannel>();
 
 var app = builder.Build();
 

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using OrderManagement.Api.Controllers;
 using OrderManagement.API.DTOs;
+using OrderManagement.Api.HostedService;
 using OrderManagement.API.Mappers;
 using OrderManagement.Domain;
 using OrderManagement.Logic;
@@ -12,9 +13,13 @@ namespace OrderManagement.API.Controllers
     [ApiController]
     [ApiConventionType(typeof(WebApiConventions))]
     public class CustomersController(
-        IOrderManagementLogic logic) : ControllerBase
+        IOrderManagementLogic logic,
+        UpdateChannel updateChannel) : ControllerBase
     {
         private readonly IOrderManagementLogic _logic = logic ?? throw new ArgumentNullException(nameof(logic));
+
+        private readonly UpdateChannel _updateChannel =
+            updateChannel ?? throw new ArgumentNullException(nameof(updateChannel));
         
         // Alternatively at Route just Api and then here in HttpGet Parameter /customers
         // get /api/customers?rating=A
@@ -82,13 +87,9 @@ namespace OrderManagement.API.Controllers
 
         [HttpPost("{customerId}/update-totals")]
         public async Task<ActionResult> UpdateCustomerTotals(Guid customerId) {
-            if (!await _logic.CustomerExistsAsync(customerId)) {
-                return NotFound(StatusInfo.InvalidCustomerId(customerId));
-            }
+            await _updateChannel.AddUpdateTaskAsync(customerId);
 
-            await _logic.UpdateTotalRevenueAsync(customerId);
-
-            return NoContent();
+            return Accepted();
         }
     }
 }
