@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Swack.Logic/Swack.Logic.csproj" />
+  <Project Path="Swack.UI/Swack.UI.csproj" Id="83c3abf1-44c7-4fe0-8eec-18534d434f29" />
+</Solution>

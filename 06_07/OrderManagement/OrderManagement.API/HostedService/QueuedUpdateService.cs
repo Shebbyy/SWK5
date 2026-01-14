@@ -3,7 +3,7 @@ using OrderManagement.Logic;
 
 namespace OrderManagement.API.HostedService;
 
-public class QueuedUpdateService (
+public class QueuedUpdateService(
     IServiceProvider serviceProvider,
     UpdateChannel updateChannel, 
     ILogger<QueuedUpdateService> logger): BackgroundService {
